@@ -36,11 +36,13 @@ router.post("/tracks", async (req, res) => {
 
 router.post('/sendMessage', async (req,res)=>{
     
-    console.log(req.body);
-    const API="kYC8XGxNcTKrBMwDIUm5Fq23buhvS41jyWlgsd67QfRJPzZeEAbjWY9mOcy5zKe4N6UhsVXnwFl7tgpS";
-    const lat="latitude ka variable dal";
-    const lan="yahan longitude ka "
-    const link="http://www.google.com/maps/place/"+lat+","+lan;
+    //console.log("latitude"+req.body.currentLocation.currentLocation.coords.latitude);
+    //console.log("longitude"+req.body.currentLocation.currentLocation.coords.longitude);
+
+    const API="pJ1UjN0nVPm4Tl7tWHC3xoXgqf96zSiQ8cMDdsIyReZEwvBKaLpyo9OcuFq0NWSmCQnx526ZGAs8rThb";
+    //const lat="latitude ka variable dal";
+    //const lan="yahan longitude ka "
+    const link="http://www.google.com/maps/place/"+req.body.currentLocation.currentLocation.coords.latitude+","+req.body.currentLocation.currentLocation.coords.longitude;
     const re = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
 
     re.headers({
@@ -48,7 +50,7 @@ router.post('/sendMessage', async (req,res)=>{
     });
 
     re.form({
-    "message": "The patient is outside safe area.You can track the patients location using following link "+link,
+    "message": "The patient is outside safe area. You can track the patient's location using following link "+link,
     "language": "english",
     "route": "q",
     "numbers": req.user.phone,

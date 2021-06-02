@@ -35,9 +35,12 @@ router.post("/tracks", async (req, res) => {
 });
 
 router.post('/sendMessage', async (req,res)=>{
-    console.log(req.user.phone);
+    
+    console.log(req.body);
     const API="kYC8XGxNcTKrBMwDIUm5Fq23buhvS41jyWlgsd67QfRJPzZeEAbjWY9mOcy5zKe4N6UhsVXnwFl7tgpS";
-
+    const lat="latitude ka variable dal";
+    const lan="yahan longitude ka "
+    const link="http://www.google.com/maps/place/"+lat+","+lan;
     const re = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
 
     re.headers({
@@ -45,7 +48,7 @@ router.post('/sendMessage', async (req,res)=>{
     });
 
     re.form({
-    "message": "The patient is outside safe area",
+    "message": "The patient is outside safe area.You can track the patients location using following link "+link,
     "language": "english",
     "route": "q",
     "numbers": req.user.phone,
